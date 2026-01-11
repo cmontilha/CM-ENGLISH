@@ -67,3 +67,12 @@ Back-end:
 1) Front-end: veja `front-end/README.md`
 2) Mobile: veja `mobile/README.md`
 3) Back-end (opcional por enquanto): veja `back-end/README.md`
+
+## Mobile no simulador (iOS)
+
+1) No terminal, rode:
+```
+cd mobile
+npx expo start
+```
+2) No terminal do Expo, pressione `i` para abrir no iOS Simulator.
