@@ -2,6 +2,17 @@
 
 CM English e uma nova ideia de plataforma para aprendizado de ingles focada em pratica guiada e acompanhamento simples do progresso. O projeto esta em fase de testes: hoje temos o front-end funcionando e a base para o back-end (Supabase) preparada. A proposta e evoluir para um fluxo completo com autenticacao, cadastro de aulas, exercicios e trilhas de estudo personalizadas.
 
+## Preview
+
+<p>
+  <img src="assets/previews/preview1.png" alt="Preview 1" width="340" />
+  <img src="assets/previews/preview1modoclaro.png" alt="Preview 1 Modo Claro" width="340" />
+  <img src="assets/previews/previewregisterpage.png" alt="Preview Register Page" width="340" />
+  <img src="assets/previews/previewmaindashboard.png" alt="Preview Main Dashboard" width="340" />
+  <img src="assets/previews/previewmaindashboardmodoclaro.png" alt="Preview Main Dashboard Modo Claro" width="340" />
+  <img src="assets/previews/previewtrilhadeaprendizado.png" alt="Trilha de aprendizado" width="340" />
+</p>
+
 ## Perfis de usuario e permissoes (visao geral)
 
 - Admin Master: acesso total ao sistema, painel administrativo central, gestao de usuarios, papeis e permissoes, ativacao/desativacao de modulos e regras globais.
