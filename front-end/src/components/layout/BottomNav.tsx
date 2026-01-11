@@ -2,6 +2,7 @@ import { Home, BookOpen, RotateCcw, User, Trophy } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useFeatures } from "@/hooks/useFeatures";
 
 const navItems = [
   { icon: Home, label: "Início", path: "/dashboard" },
@@ -13,12 +14,18 @@ const navItems = [
 
 const BottomNav = () => {
   const location = useLocation();
+  const { isEnabled } = useFeatures();
+  const visibleItems = navItems.filter((item) => {
+    if (item.path === "/courses") return isEnabled("courses");
+    if (item.path === "/review") return isEnabled("review");
+    return true;
+  });
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       <div className="glass-card border-t border-border/30 safe-area-bottom">
         <div className="flex items-center justify-around h-16">
-          {navItems.map((item) => {
+          {visibleItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
               <Link

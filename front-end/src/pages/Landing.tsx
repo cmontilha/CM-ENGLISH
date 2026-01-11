@@ -33,6 +33,8 @@ const levels = [
   { name: "A2 - Elementary", color: "from-accent to-secondary" },
   { name: "B1 - Intermediate", color: "from-neon-green to-secondary" },
   { name: "B2 - Upper Intermediate", color: "from-primary to-neon-green" },
+  { name: "C1 - Advanced", color: "from-secondary to-accent" },
+  { name: "C2 - Proficiency", color: "from-accent to-primary" },
 ];
 
 const containerVariants = {
@@ -56,7 +58,7 @@ const Landing = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-2">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
@@ -69,8 +71,21 @@ const Landing = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
+            className="text-center max-w-4xl mx-auto -mt-14"
           >
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col items-center -mb-12"
+            >
+              <img
+                src="/logo.png"
+                alt="CM English"
+                className="w-64 h-64 md:w-80 md:h-80 object-contain"
+              />
+            </motion.div>
+
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -252,7 +267,7 @@ const Landing = () => {
                   <div className="progress-bar mt-2">
                     <div
                       className="progress-bar-fill"
-                      style={{ width: `${Math.max(5, 100 - index * 20)}%` }}
+                      style={{ width: `${Math.max(10, 100 - index * 12)}%` }}
                     />
                   </div>
                 </div>
@@ -294,7 +309,7 @@ const Landing = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-muted-foreground text-sm">
-              © 2024 CM ENGLISH. Todos os direitos reservados.
+              © 2026 CM ENGLISH. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">

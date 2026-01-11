@@ -5,10 +5,13 @@ import { useState } from "react";
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import ThemeToggle from "@/components/ThemeToggle";
+import { useFeatures } from "@/hooks/useFeatures";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, signOut, role } = useAuth();
+  const { isEnabled } = useFeatures();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -25,7 +28,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/">
+          <Link to={user ? "/dashboard" : "/"}>
             <Logo size="sm" animated={false} />
           </Link>
 
@@ -36,13 +39,28 @@ const Navbar = () => {
                 <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
                   Dashboard
                 </Link>
-                <Link to="/courses" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Trilhas
-                </Link>
-                <Link to="/review" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Revisão
-                </Link>
+                {isEnabled("courses") && (
+                  <Link to="/courses" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Trilhas
+                  </Link>
+                )}
+                {isEnabled("review") && (
+                  <Link to="/review" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Revisão
+                  </Link>
+                )}
+                {role === "tutor" && isEnabled("tutor_tools") && (
+                  <Link to="/tutor/classes" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Turmas
+                  </Link>
+                )}
+                {role === "admin_master" && (
+                  <Link to="/admin" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Admin
+                  </Link>
+                )}
                 <div className="flex items-center gap-3">
+                  <ThemeToggle />
                   <Link to="/profile">
                     <Button variant="ghost" size="icon">
                       <User className="w-5 h-5" />
@@ -56,6 +74,7 @@ const Navbar = () => {
               </>
             ) : (
               <>
+                <ThemeToggle />
                 <Link to="/auth?mode=login">
                   <Button variant="ghost">Entrar</Button>
                 </Link>
@@ -66,13 +85,16 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              className="text-foreground"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -93,20 +115,42 @@ const Navbar = () => {
                   >
                     Dashboard
                   </Link>
-                  <Link
-                    to="/courses"
-                    className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Trilhas
-                  </Link>
-                  <Link
-                    to="/review"
-                    className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Revisão
-                  </Link>
+                  {isEnabled("courses") && (
+                    <Link
+                      to="/courses"
+                      className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Trilhas
+                    </Link>
+                  )}
+                  {isEnabled("review") && (
+                    <Link
+                      to="/review"
+                      className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Revisão
+                    </Link>
+                  )}
+                  {role === "tutor" && isEnabled("tutor_tools") && (
+                    <Link
+                      to="/tutor/classes"
+                      className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Turmas
+                    </Link>
+                  )}
+                  {role === "admin_master" && (
+                    <Link
+                      to="/admin"
+                      className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Admin
+                    </Link>
+                  )}
                   <Link
                     to="/profile"
                     className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"

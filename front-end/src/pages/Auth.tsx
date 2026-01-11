@@ -20,6 +20,7 @@ const registerSchema = z.object({
   email: z.string().email("Email inválido"),
   password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
   confirmPassword: z.string(),
+  role: z.enum(["student", "tutor"]),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Senhas não conferem",
   path: ["confirmPassword"],
@@ -29,7 +30,7 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { signIn, signUp, user, loading: authLoading } = useAuth();
+  const { signIn, signUp, user, role, loading: authLoading } = useAuth();
 
   const [mode, setMode] = useState<"login" | "register">(
     searchParams.get("mode") === "register" ? "register" : "login"
@@ -43,13 +44,18 @@ const Auth = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "student" as "student" | "tutor",
   });
 
   useEffect(() => {
     if (user && !authLoading) {
-      navigate("/dashboard");
+      if (role === "admin_master") {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
+      }
     }
-  }, [user, authLoading, navigate]);
+  }, [user, role, authLoading, navigate]);
 
   useEffect(() => {
     const modeParam = searchParams.get("mode");
@@ -98,7 +104,6 @@ const Auth = () => {
             title: "Bem-vindo de volta!",
             description: "Login realizado com sucesso.",
           });
-          navigate("/dashboard");
         }
       } else {
         const result = registerSchema.safeParse(formData);
@@ -114,7 +119,12 @@ const Auth = () => {
           return;
         }
 
-        const { error } = await signUp(formData.email, formData.password, formData.name);
+        const { error } = await signUp(
+          formData.email,
+          formData.password,
+          formData.name,
+          formData.role
+        );
         if (error) {
           if (error.message.includes("User already registered")) {
             toast({
@@ -210,6 +220,39 @@ const Auth = () => {
                 </div>
                 {errors.name && (
                   <p className="text-destructive text-xs">{errors.name}</p>
+                )}
+              </div>
+            )}
+
+            {mode === "register" && (
+              <div className="space-y-2">
+                <Label>Perfil desejado</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, role: "student" })}
+                    className={`p-3 rounded-xl border text-sm transition-all ${
+                      formData.role === "student"
+                        ? "border-primary bg-primary/10 text-foreground"
+                        : "border-border bg-card hover:border-primary/50 text-muted-foreground"
+                    }`}
+                  >
+                    Aluno
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, role: "tutor" })}
+                    className={`p-3 rounded-xl border text-sm transition-all ${
+                      formData.role === "tutor"
+                        ? "border-primary bg-primary/10 text-foreground"
+                        : "border-border bg-card hover:border-primary/50 text-muted-foreground"
+                    }`}
+                  >
+                    Tutor
+                  </button>
+                </div>
+                {errors.role && (
+                  <p className="text-destructive text-xs">{errors.role}</p>
                 )}
               </div>
             )}

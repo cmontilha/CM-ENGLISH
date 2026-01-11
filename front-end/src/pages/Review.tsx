@@ -4,6 +4,8 @@ import { RotateCcw, Check, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/layout/Navbar";
 import BottomNav from "@/components/layout/BottomNav";
+import { reviewWordBank } from "@/data/reviewWordBank";
+import { mockProgress } from "@/data/mockProgress";
 
 interface ReviewItem {
   id: string;
@@ -14,17 +16,20 @@ interface ReviewItem {
   lastAttempt?: Date;
 }
 
-// Mock review items
-const mockReviewItems: ReviewItem[] = [
-  { id: "1", word: "Hello", translation: "Olá", example: "Hello, how are you?", attempts: 3 },
-  { id: "2", word: "Goodbye", translation: "Tchau", example: "Goodbye, see you tomorrow!", attempts: 2 },
-  { id: "3", word: "Please", translation: "Por favor", example: "Please help me.", attempts: 1 },
-  { id: "4", word: "Thank you", translation: "Obrigado", example: "Thank you very much!", attempts: 2 },
-  { id: "5", word: "Sorry", translation: "Desculpa", example: "I'm sorry for being late.", attempts: 1 },
-];
+const buildReviewItems = (): ReviewItem[] => {
+  const wordsLearned = Math.min(reviewWordBank.length, mockProgress.lessonsCompleted * 20);
+
+  return reviewWordBank.slice(0, wordsLearned).map((entry, index) => ({
+    id: `${index + 1}`,
+    word: entry.word,
+    translation: entry.translation,
+    example: `I use the word \"${entry.word}\" in a sentence.`,
+    attempts: 0,
+  }));
+};
 
 const Review = () => {
-  const [items, setItems] = useState(mockReviewItems);
+  const [items] = useState(buildReviewItems);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [reviewed, setReviewed] = useState(0);
