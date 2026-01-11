@@ -13,6 +13,15 @@ CM English e uma nova ideia de plataforma para aprendizado de ingles focada em p
   <img src="assets/previews/previewtrilhadeaprendizado.png" alt="Trilha de aprendizado" width="360" />
 </p>
 
+## Mobile Preview
+
+<p>
+  <img src="assets/previews/mobilepreviewsplashscreen.png" alt="Mobile Splash Screen" width="180" />
+  <img src="assets/previews/mobilemainpage.png" alt="Mobile Main Page" width="180" />
+  <img src="assets/previews/mobileloginscreen.png" alt="Mobile Login Page" width="180" />
+  <img src="assets/previews/mobiledashboard.png" alt="Mobile Dashboard" width="180" />
+</p>
+
 ## Perfis de usuario e permissoes (visao geral)
 
 - Admin Master: acesso total ao sistema, painel administrativo central, gestao de usuarios, papeis e permissoes, ativacao/desativacao de modulos e regras globais.
@@ -28,6 +37,7 @@ CM English e uma nova ideia de plataforma para aprendizado de ingles focada em p
 ## Estrutura do repositorio
 
 - `front-end/` - aplicacao web (Vite + React)
+- `mobile/` - aplicativo mobile (Expo + React Native)
 - `back-end/` - infraestrutura e configuracao do banco (Supabase)
 
 Cada pasta tem seu proprio README com detalhes de como rodar, variaveis e manutencao.
@@ -38,6 +48,10 @@ Front-end:
 - React + Vite
 - TypeScript
 - Tailwind CSS
+
+Mobile:
+- Expo + React Native
+- TypeScript
 
 Back-end:
 - Supabase (Postgres + Auth)
@@ -51,4 +65,5 @@ Back-end:
 ## Como rodar
 
 1) Front-end: veja `front-end/README.md`
-2) Back-end (opcional por enquanto): veja `back-end/README.md`
+2) Mobile: veja `mobile/README.md`
+3) Back-end (opcional por enquanto): veja `back-end/README.md`
