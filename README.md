@@ -7,9 +7,9 @@ CM English e uma nova ideia de plataforma para aprendizado de ingles focada em p
 <p>
   <img src="assets/previews/preview1.png" alt="Preview 1" width="360" />
   <img src="assets/previews/preview1modoclaro.png" alt="Preview 1 Modo Claro" width="360" />
-  <img src="assets/previews/previewregisterpage.png" alt="Preview Register Page" width="360" />
   <img src="assets/previews/previewmaindashboard.png" alt="Preview Main Dashboard" width="360" />
   <img src="assets/previews/previewmaindashboardmodoclaro.png" alt="Preview Main Dashboard Modo Claro" width="360" />
+  <img src="assets/previews/previewregisterpage.png" alt="Preview Register Page" width="360" />
   <img src="assets/previews/previewtrilhadeaprendizado.png" alt="Trilha de aprendizado" width="360" />
 </p>
 
