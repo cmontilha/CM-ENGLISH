@@ -1,4 +1,4 @@
-import { Home, BookOpen, RotateCcw, User, Trophy } from "lucide-react";
+import { Home, BookOpen, RotateCcw, User, Trophy, Mic } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import { useFeatures } from "@/hooks/useFeatures";
 const navItems = [
   { icon: Home, label: "Início", path: "/dashboard" },
   { icon: BookOpen, label: "Trilhas", path: "/courses" },
+  { icon: Mic, label: "Voice", path: "/voice-chat" },
   { icon: Trophy, label: "XP", path: "/leaderboard" },
   { icon: RotateCcw, label: "Revisão", path: "/review" },
   { icon: User, label: "Perfil", path: "/profile" },

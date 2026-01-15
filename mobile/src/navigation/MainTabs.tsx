@@ -4,6 +4,7 @@ import DashboardScreen from "../screens/DashboardScreen";
 import CoursesScreen from "../screens/CoursesScreen";
 import ReviewScreen from "../screens/ReviewScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import VoiceChatScreen from "../screens/VoiceChatScreen";
 import { colors } from "../theme/colors";
 
 const Tab = createBottomTabNavigator();
@@ -26,6 +27,7 @@ const MainTabs = () => {
             Dashboard: focused ? "home" : "home-outline",
             Trilhas: focused ? "book" : "book-outline",
             Revisao: focused ? "repeat" : "repeat-outline",
+            Voice: focused ? "mic" : "mic-outline",
             Perfil: focused ? "person" : "person-outline",
           };
 
@@ -35,6 +37,7 @@ const MainTabs = () => {
     >
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Trilhas" component={CoursesScreen} />
+      <Tab.Screen name="Voice" component={VoiceChatScreen} />
       <Tab.Screen name="Revisao" component={ReviewScreen} />
       <Tab.Screen name="Perfil" component={ProfileScreen} />
     </Tab.Navigator>

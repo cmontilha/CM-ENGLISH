@@ -17,6 +17,7 @@ import Courses from "./pages/Courses";
 import LessonPlayer from "./pages/LessonPlayer";
 import Review from "./pages/Review";
 import Profile from "./pages/Profile";
+import VoiceChat from "./pages/VoiceChat";
 import NotFound from "./pages/NotFound";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -76,6 +77,14 @@ const App = () => (
                   element={
                     <ProtectedRoute>
                       <Review />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/voice-chat"
+                  element={
+                    <ProtectedRoute>
+                      <VoiceChat />
                     </ProtectedRoute>
                   }
                 />

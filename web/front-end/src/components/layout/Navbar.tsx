@@ -49,6 +49,9 @@ const Navbar = () => {
                     Revisão
                   </Link>
                 )}
+                <Link to="/voice-chat" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Voice Chat
+                </Link>
                 {role === "tutor" && isEnabled("tutor_tools") && (
                   <Link to="/tutor/classes" className="text-muted-foreground hover:text-foreground transition-colors">
                     Turmas
@@ -133,6 +136,13 @@ const Navbar = () => {
                       Revisão
                     </Link>
                   )}
+                  <Link
+                    to="/voice-chat"
+                    className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Voice Chat
+                  </Link>
                   {role === "tutor" && isEnabled("tutor_tools") && (
                     <Link
                       to="/tutor/classes"
