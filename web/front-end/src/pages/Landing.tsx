@@ -96,10 +96,13 @@ const Landing = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-6">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 hero-grid-overlay" />
-          <div className="absolute -top-14 -left-24 w-[460px] h-[380px] rotate-[-12deg] rounded-[38%] bg-primary/30 blur-[70px]" />
-          <div className="absolute top-2 -right-24 w-[460px] h-[390px] rotate-[12deg] rounded-[38%] bg-secondary/28 blur-[70px]" />
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[620px] h-[280px] rounded-[42%] bg-accent/20 blur-[62px]" />
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/background1.png')" }}
+          />
+          <div className="absolute inset-0 hero-content-focus" />
+          <div className="absolute inset-0 bg-background/34" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/24 via-background/8 to-background/62" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -126,14 +129,14 @@ const Landing = () => {
                 </div>
 
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.05]">
-                  <span className="block">Aprenda Inglês para</span>
-                  <span className="gradient-text mt-2 inline-flex min-w-[12ch] justify-center items-center">
+                  <span className="hero-title-readable block">Aprenda Inglês para</span>
+                  <span className="hero-rotating-word gradient-text mt-2 inline-flex min-w-[12ch] justify-center items-center">
                     {typedWord || "\u00A0"}
                     <span className="typewriter-caret" />
                   </span>
                 </h1>
 
-                <p className="text-lg md:text-2xl text-muted-foreground mb-9 max-w-3xl mx-auto">
+                <p className="hero-subtitle-readable text-lg md:text-2xl mb-9 max-w-3xl mx-auto">
                   Trilhas personalizadas, exercícios gamificados e revisão inteligente.
                   Fluência real para situações do dia a dia.
                 </p>
@@ -234,15 +237,17 @@ const Landing = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="glass-card p-6 card-hover group"
+                className="glass-card relative overflow-hidden p-6 card-hover group border border-border/50 hover:border-primary/35"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="pointer-events-none absolute -top-8 -right-10 w-28 h-28 rounded-full bg-primary/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="pointer-events-none absolute -bottom-10 -left-8 w-24 h-24 rounded-full bg-secondary/12 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.35)] transition-all duration-300">
                   <feature.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-display font-semibold text-lg mb-2">
+                <h3 className="font-display font-semibold text-lg mb-2 transition-colors group-hover:text-primary">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm transition-colors group-hover:text-foreground/85">
                   {feature.description}
                 </p>
               </motion.div>
@@ -253,7 +258,8 @@ const Landing = () => {
 
       {/* Levels Section */}
       <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/7 via-transparent to-accent/7" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             variants={containerVariants}
