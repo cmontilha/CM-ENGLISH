@@ -26,3 +26,9 @@ Abra no Expo Go (iOS/Android) ou execute em emulador.
 ## Observacao
 
 A integracao com Supabase e roles sera conectada na proxima fase.
+
+## Variaveis de ambiente
+
+Use o arquivo `.env` na pasta `mobile/` com:
+- `EXPO_PUBLIC_SUPABASE_URL`
+- `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`

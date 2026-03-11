@@ -13,7 +13,7 @@ Essa hierarquia deve ser implementada no banco com RLS e em regras de autorizaca
 ## O que existe hoje
 
 - `supabase/config.toml` - configuracoes do projeto local
-- `supabase/migrations/` - (a criar) migrations do banco
+- `supabase/migrations/20260101000000_init_platform.sql` - migration inicial com schema, RLS, policies e trigger de `profiles`
 
 ## Como rodar (local)
 
@@ -31,8 +31,34 @@ supabase status
 
 ## Banco de dados e migrations
 
-- Migrations devem ficar em `back-end/supabase/migrations/`
-- As variaveis e credenciais locais ficam gerenciadas pelo Supabase CLI
+- Migrations ficam em `web/back-end/supabase/migrations/`
+- Para aplicar no projeto Supabase web, use `supabase link` + `supabase db push`
+
+## Aplicar no Supabase web (cloud)
+
+1. Faça login no CLI:
+
+```sh
+supabase login
+```
+
+2. Link este diretório ao seu projeto cloud (substitua pelo Project Reference do seu projeto):
+
+```sh
+supabase link --project-ref <SEU_PROJECT_REF>
+```
+
+3. Aplique as migrations no banco remoto:
+
+```sh
+supabase db push
+```
+
+4. Se quiser validar o histórico aplicado:
+
+```sh
+supabase migration list
+```
 
 ## Modelo de dados (proposta inicial)
 

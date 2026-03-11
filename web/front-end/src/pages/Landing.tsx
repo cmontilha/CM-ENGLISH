@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Play, Zap, Trophy, Target, Star, ArrowRight, CheckCircle } from "lucide-react";
+import { Play, Zap, Trophy, Target, Star, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/layout/Navbar";
 
@@ -28,7 +28,6 @@ const features = [
 ];
 
 const levels = [
-  { name: "A0 - Absolute Beginner", color: "from-primary to-accent" },
   { name: "A1 - Beginner", color: "from-secondary to-primary" },
   { name: "A2 - Elementary", color: "from-accent to-secondary" },
   { name: "B1 - Intermediate", color: "from-neon-green to-secondary" },
@@ -84,16 +83,6 @@ const Landing = () => {
                 alt="CM English"
                 className="w-64 h-64 md:w-80 md:h-80 object-contain"
               />
-            </motion.div>
-
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6"
-            >
-              <Zap className="w-4 h-4 text-secondary" />
-              <span className="text-sm text-foreground">+10.000 alunos ativos</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight">
@@ -233,7 +222,7 @@ const Landing = () => {
               variants={itemVariants}
               className="text-3xl md:text-4xl font-display font-bold mb-4"
             >
-              Sua jornada de <span className="gradient-text">A0 a C2</span>
+              Sua jornada do <span className="gradient-text">A1 ao C2</span>
             </motion.h2>
             <motion.p
               variants={itemVariants}
@@ -255,51 +244,17 @@ const Landing = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="glass-card p-4 flex items-center gap-4 card-hover"
+                className="glass-card p-4 card-hover"
               >
-                <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${level.color} flex items-center justify-center font-display font-bold text-background`}
-                >
-                  {index + 1}
+                <h3 className="font-semibold">{level.name}</h3>
+                <div className="progress-bar mt-2">
+                  <div
+                    className="progress-bar-fill"
+                    style={{ width: `${Math.max(10, 100 - index * 12)}%` }}
+                  />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold">{level.name}</h3>
-                  <div className="progress-bar mt-2">
-                    <div
-                      className="progress-bar-fill"
-                      style={{ width: `${Math.max(10, 100 - index * 12)}%` }}
-                    />
-                  </div>
-                </div>
-                <ArrowRight className="w-5 h-5 text-muted-foreground" />
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 relative">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="glass-card p-8 md:p-12 text-center neon-border"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Pronto para dominar o inglês?
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Junte-se a milhares de alunos e comece sua jornada hoje mesmo.
-              Sem cartão de crédito necessário.
-            </p>
-            <Link to="/auth?mode=register">
-              <Button size="xl" variant="glow">
-                <Play className="w-5 h-5" />
-                Começar Gratuitamente
-              </Button>
-            </Link>
           </motion.div>
         </div>
       </section>

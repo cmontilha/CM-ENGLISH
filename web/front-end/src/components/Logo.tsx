@@ -11,6 +11,11 @@ const Logo = ({ size = "md", animated = true }: LogoProps) => {
     md: "text-2xl",
     lg: "text-4xl",
   };
+  const logoSizeClasses = {
+    sm: "w-9 h-9",
+    md: "w-10 h-10",
+    lg: "w-12 h-12",
+  };
 
   const Wrapper = animated ? motion.div : "div";
 
@@ -23,12 +28,11 @@ const Logo = ({ size = "md", animated = true }: LogoProps) => {
         transition: { duration: 0.5 },
       })}
     >
-      <div className="relative">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-accent to-secondary flex items-center justify-center shadow-lg shadow-primary/30">
-          <span className="text-white font-display font-bold text-lg">CM</span>
-        </div>
-        <div className="absolute -inset-0.5 bg-gradient-to-br from-primary via-accent to-secondary rounded-xl opacity-50 blur-sm -z-10" />
-      </div>
+      <img
+        src="/logo.png"
+        alt="CM English logo"
+        className={`${logoSizeClasses[size]} object-contain shrink-0`}
+      />
       <div className="flex flex-col">
         <span className={`font-display font-bold gradient-text ${sizeClasses[size]}`}>
           CM ENGLISH

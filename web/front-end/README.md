@@ -21,7 +21,7 @@ As variaveis ficam em `.env` dentro de `front-end/`. Para o Vite, use o prefixo 
 
 Exemplos (ajuste conforme necessario):
 - `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
 
 ## Scripts
 
