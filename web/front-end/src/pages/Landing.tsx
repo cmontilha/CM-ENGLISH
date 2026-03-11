@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Play, Zap, Trophy, Target, Star, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,88 +52,131 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+const rotatingHeroWords = [
+  "Vida Real",
+  "Viagens",
+  "Entrevistas",
+  "Reuniões",
+  "Networking",
+];
+
 const Landing = () => {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [typedWord, setTypedWord] = useState("");
+  const [isDeletingWord, setIsDeletingWord] = useState(false);
+
+  useEffect(() => {
+    const currentWord = rotatingHeroWords[wordIndex];
+    const typingSpeed = isDeletingWord ? 45 : 85;
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    if (!isDeletingWord && typedWord === currentWord) {
+      timeoutId = setTimeout(() => setIsDeletingWord(true), 1400);
+    } else if (isDeletingWord && typedWord === "") {
+      timeoutId = setTimeout(() => {
+        setIsDeletingWord(false);
+        setWordIndex((prev) => (prev + 1) % rotatingHeroWords.length);
+      }, 220);
+    } else {
+      timeoutId = setTimeout(() => {
+        const nextLength = isDeletingWord ? typedWord.length - 1 : typedWord.length + 1;
+        setTypedWord(currentWord.slice(0, nextLength));
+      }, typingSpeed);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [isDeletingWord, typedWord, wordIndex]);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-2">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-6">
         {/* Background Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 hero-grid-overlay" />
+          <div className="absolute -top-14 -left-24 w-[460px] h-[380px] rotate-[-12deg] rounded-[38%] bg-primary/30 blur-[70px]" />
+          <div className="absolute top-2 -right-24 w-[460px] h-[390px] rotate-[12deg] rounded-[38%] bg-secondary/28 blur-[70px]" />
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[620px] h-[280px] rounded-[42%] bg-accent/20 blur-[62px]" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto -mt-14"
+            transition={{ duration: 0.7 }}
+            className="max-w-5xl mx-auto text-center px-2 md:px-8"
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex flex-col items-center -mb-12"
+              transition={{ delay: 0.05 }}
+              className="relative z-10"
             >
-              <img
-                src="/logo.png"
-                alt="CM English"
-                className="w-64 h-64 md:w-80 md:h-80 object-contain"
-              />
-            </motion.div>
+                <img
+                  src="/logo.png"
+                  alt="CM English"
+                  className="w-52 h-52 md:w-64 md:h-64 object-contain mx-auto -mt-8 md:-mt-10 -mb-8"
+                />
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight">
-              Aprenda Inglês para a{" "}
-              <span className="gradient-text">Vida Real</span>
-            </h1>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/35 bg-primary/10 text-xs uppercase tracking-[0.16em] text-primary mb-6">
+                  Inglês com prática guiada
+                </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Trilhas personalizadas, exercícios gamificados e revisão inteligente.
-              Do zero à fluência no seu ritmo.
-            </p>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.05]">
+                  <span className="block">Aprenda Inglês para</span>
+                  <span className="gradient-text mt-2 inline-flex min-w-[12ch] justify-center items-center">
+                    {typedWord || "\u00A0"}
+                    <span className="typewriter-caret" />
+                  </span>
+                </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Link to="/auth?mode=register">
-                <Button size="xl" variant="glow" className="w-full sm:w-auto">
-                  <Play className="w-5 h-5" />
-                  Começar Grátis
-                </Button>
-              </Link>
-              <Link to="/auth?mode=login">
-                <Button size="xl" variant="outline" className="w-full sm:w-auto">
-                  Já tenho conta
-                </Button>
-              </Link>
-            </motion.div>
+                <p className="text-lg md:text-2xl text-muted-foreground mb-9 max-w-3xl mx-auto">
+                  Trilhas personalizadas, exercícios gamificados e revisão inteligente.
+                  Fluência real para situações do dia a dia.
+                </p>
 
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="flex items-center justify-center gap-6 mt-12 text-muted-foreground text-sm"
-            >
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-neon-green" />
-                <span>Acesso vitalício</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-neon-green" />
-                <span>Mobile-first</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-neon-green" />
-                <span>Certificado</span>
-              </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center"
+                >
+                  <Link to="/auth?mode=register">
+                    <Button size="xl" variant="glow" className="w-full sm:w-auto px-8">
+                      <Play className="w-5 h-5" />
+                      Começar Grátis
+                    </Button>
+                  </Link>
+                  <Link to="/auth?mode=login">
+                    <Button size="xl" variant="outline" className="w-full sm:w-auto px-8">
+                      Já tenho conta
+                    </Button>
+                  </Link>
+                </motion.div>
+
+                {/* Trust Indicators */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.45 }}
+                  className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-10 text-muted-foreground text-sm"
+                >
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/40 border border-border/30">
+                    <CheckCircle className="w-4 h-4 text-neon-green" />
+                    <span>Acesso vitalício</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/40 border border-border/30">
+                    <CheckCircle className="w-4 h-4 text-neon-green" />
+                    <span>Mobile-first</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/40 border border-border/30">
+                    <CheckCircle className="w-4 h-4 text-neon-green" />
+                    <span>Certificado</span>
+                  </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

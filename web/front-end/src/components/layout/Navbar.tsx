@@ -24,7 +24,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border/30"
+      className="fixed top-0 left-0 right-0 z-50 bg-transparent"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
@@ -106,7 +106,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden py-4 border-t border-border/30"
+            className="md:hidden py-4"
           >
             <div className="flex flex-col gap-3">
               {user ? (

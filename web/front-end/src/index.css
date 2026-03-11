@@ -193,6 +193,27 @@
     box-shadow: 0 14px 40px -12px hsl(var(--primary) / 0.35);
   }
 
+  .hero-grid-overlay {
+    background:
+      linear-gradient(120deg, hsl(var(--primary) / 0.24) 0%, transparent 36%),
+      linear-gradient(300deg, hsl(var(--secondary) / 0.2) 6%, transparent 42%),
+      radial-gradient(70% 70% at 50% 42%, hsl(var(--accent) / 0.18) 0%, transparent 72%),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.06), transparent 34%);
+    mask-image: radial-gradient(circle at 50% 45%, black 28%, transparent 90%);
+    opacity: 1;
+  }
+
+  .typewriter-caret {
+    width: 2px;
+    height: 1em;
+    margin-left: 0.08em;
+    border-radius: 999px;
+    display: inline-block;
+    background: hsl(var(--accent));
+    box-shadow: 0 0 12px hsl(var(--accent) / 0.9);
+    animation: blink-caret 0.9s step-end infinite;
+  }
+
   .voice-wave-bar {
     @apply w-4 rounded-full;
     background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent)));
@@ -257,6 +278,15 @@
   }
   50% {
     box-shadow: 0 0 30px hsl(220 90% 56% / 0.6), 0 0 60px hsl(220 90% 56% / 0.3);
+  }
+}
+
+@keyframes blink-caret {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
   }
 }
 
