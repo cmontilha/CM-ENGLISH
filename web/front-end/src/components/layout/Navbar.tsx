@@ -8,7 +8,11 @@ import { useAuth } from "@/hooks/useAuth";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useFeatures } from "@/hooks/useFeatures";
 
-const Navbar = () => {
+interface NavbarProps {
+  showThemeToggle?: boolean;
+}
+
+const Navbar = ({ showThemeToggle = true }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signOut, role } = useAuth();
   const { isEnabled } = useFeatures();
@@ -63,7 +67,7 @@ const Navbar = () => {
                   </Link>
                 )}
                 <div className="flex items-center gap-3">
-                  <ThemeToggle />
+                  {showThemeToggle && <ThemeToggle />}
                   <Link to="/profile">
                     <Button variant="ghost" size="icon">
                       <User className="w-5 h-5" />
@@ -77,7 +81,7 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <ThemeToggle />
+                {showThemeToggle && <ThemeToggle />}
                 <Link to="/auth?mode=login">
                   <Button variant="ghost">Entrar</Button>
                 </Link>
@@ -90,7 +94,7 @@ const Navbar = () => {
 
           {/* Mobile Actions */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
+            {showThemeToggle && <ThemeToggle />}
             <button
               className="text-foreground"
               onClick={() => setIsOpen(!isOpen)}

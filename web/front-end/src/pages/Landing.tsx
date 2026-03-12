@@ -90,7 +90,7 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar showThemeToggle={false} />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-6">
